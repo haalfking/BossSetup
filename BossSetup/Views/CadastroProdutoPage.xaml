@@ -1,17 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.CadastroProdutoPage"
              Title="Cadastro de Produto">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
 
-        <Entry x:Name="txtNome" Placeholder="Nome do produto" />
-        <Entry x:Name="txtDescricao" Placeholder="Descrição do produto" />
-        <Entry x:Name="txtPreco" Placeholder="Preço" Keyboard="Numeric"/>
+        <VerticalStackLayout Padding="20"
+                             Spacing="15">
 
-        <Button Text="Salvar Produto" Clicked="OnSalvarClicked" />
+            <Label Text="Cadastrar Produto"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
 
-    </VerticalStackLayout>
+            <Entry x:Name="txtNome"
+                   Placeholder="Nome do produto" />
+
+            <Editor x:Name="txtDescricao"
+                    Placeholder="Descrição do produto"
+                    AutoSize="TextChanges"
+                    HeightRequest="100"/>
+
+            <Entry x:Name="txtPreco"
+                   Placeholder="Preço"
+                   Keyboard="Numeric"/>
+
+            <!-- NOVOS CAMPOS -->
+
+            <Entry x:Name="txtCategoria"
+                   Placeholder="Categoria" />
+
+            <Entry x:Name="txtEstoque"
+                   Placeholder="Quantidade em estoque"
+                   Keyboard="Numeric"/>
+
+            <Entry x:Name="txtImagem"
+                   Placeholder="URL da imagem do produto" />
+
+            <HorizontalStackLayout Spacing="10">
+
+                <Label Text="Produto em destaque?"
+                       VerticalOptions="Center"/>
+
+                <Switch x:Name="switchDestaque"/>
+
+            </HorizontalStackLayout>
+
+            <Button Text="Salvar Produto"
+                    Clicked="OnSalvarClicked"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>

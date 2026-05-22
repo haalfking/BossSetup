@@ -10,12 +10,18 @@ namespace BossSetup.Database
         public ProdutoDatabase(string dbPath)
         {
             _db = new SQLiteConnection(dbPath);
+
+            // cria tabela se não existir
             _db.CreateTable<Produto>();
         }
 
+        // INSERT ou UPDATE automático
         public int Salvar(Produto produto)
         {
-            return _db.Insert(produto);
+            if (produto.Id != 0)
+                return _db.Update(produto);
+            else
+                return _db.Insert(produto);
         }
 
         public List<Produto> Listar()
@@ -23,9 +29,19 @@ namespace BossSetup.Database
             return _db.Table<Produto>().ToList();
         }
 
+        public Produto ObterPorId(int id)
+        {
+            return _db.Table<Produto>().FirstOrDefault(p => p.Id == id);
+        }
+
         public int Deletar(int id)
         {
             return _db.Delete<Produto>(id);
+        }
+
+        public void LimparTabela()
+        {
+            _db.DeleteAll<Produto>();
         }
     }
 }

@@ -7,17 +7,75 @@
     <VerticalStackLayout Padding="20" Spacing="10">
 
         <CollectionView x:Name="collectionProdutos" SelectionMode="None">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Nome}" FontSize="18" FontAttributes="Bold"/>
-                            <Label Text="{Binding Descricao}" FontSize="14" />
-                            <Label Text="{Binding Preco, StringFormat='Preço: {0:C}'}" FontSize="16" TextColor="Green"/>
+
+                    <Frame BorderColor="Gray"
+                           CornerRadius="12"
+                           Padding="10"
+                           Margin="5">
+
+                        <!-- CLIQUE PARA EDITAR -->
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnItemTapped"
+                                                  CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="5">
+
+                            <!-- Nome -->
+                            <Label Text="{Binding Nome}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+
+                            <!-- Descrição -->
+                            <Label Text="{Binding Descricao}"
+                                   FontSize="14"
+                                   TextColor="Gray"/>
+
+                            <!-- Categoria -->
+                            <Label Text="{Binding Categoria}"
+                                   FontSize="13"
+                                   TextColor="DarkBlue"/>
+
+                            <!-- Preço -->
+                            <Label Text="{Binding Preco, StringFormat='Preço: R$ {0:F2}'}"
+                                   FontSize="16"
+                                   TextColor="Green"/>
+
+                            <!-- Estoque -->
+                            <Label Text="{Binding Estoque, StringFormat='Estoque: {0}'}"
+                                   FontSize="13"/>
+
+                            <!-- Avaliação -->
+                            <Label Text="{Binding Avaliacao, StringFormat='⭐ {0:F1}'}"
+                                   FontSize="13"/>
+
+                            <!-- Destaque -->
+                            <Label Text="{Binding Destaque, StringFormat='Destaque: {0}'}"
+                                   FontSize="12"
+                                   TextColor="Red"/>
+
+                            <!-- Imagem -->
+                            <Image Source="{Binding Imagem}"
+                                   HeightRequest="120"
+                                   Aspect="AspectFill"/>
+
+                            <!-- BOTÃO EXCLUIR -->
+                            <Button Text="Excluir"
+                                    BackgroundColor="Red"
+                                    TextColor="White"
+                                    Clicked="OnExcluirClicked"
+                                    CommandParameter="{Binding Id}"/>
+
                         </VerticalStackLayout>
+
                     </Frame>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
         </CollectionView>
 
     </VerticalStackLayout>
