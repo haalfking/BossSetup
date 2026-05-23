@@ -3,17 +3,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.CadastroProdutoPage"
-             Title="Cadastro de Produto">
+             Title="Cadastro de Produto"
+              BackgroundColor="Black"
+             NavigationPage.HasNavigationBar="False">
 
     <ScrollView>
 
         <VerticalStackLayout Padding="20"
                              Spacing="15">
 
+            <Image Source="logo..png"
+                   HeightRequest="250"
+                   HorizontalOptions="Center"/>
+
             <Label Text="Cadastrar Produto"
                    FontSize="28"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center"
+                   TextColor="White"/>
 
             <Entry x:Name="txtNome"
                    Placeholder="Nome do produto" />
@@ -42,14 +49,16 @@
             <HorizontalStackLayout Spacing="10">
 
                 <Label Text="Produto em destaque?"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center"
+                       TextColor="White"/>
 
                 <Switch x:Name="switchDestaque"/>
 
             </HorizontalStackLayout>
 
             <Button Text="Salvar Produto"
-                    Clicked="OnSalvarClicked"/>
+                    Clicked="OnSalvarClicked"
+                     BackgroundColor="#121212"/>
 
         </VerticalStackLayout>
 

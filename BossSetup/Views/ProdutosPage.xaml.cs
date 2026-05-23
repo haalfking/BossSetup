@@ -10,18 +10,30 @@ public partial class ProdutosPage : ContentPage
         InitializeComponent();
     }
 
+    // 🔄 sempre recarrega ao voltar pra tela
     protected override void OnAppearing()
     {
         base.OnAppearing();
         CarregarProdutos();
     }
 
+    // 📦 carregar produtos (corrigido)
     private void CarregarProdutos()
     {
-        collectionProdutos.ItemsSource = App.ProdutoDB.Listar();
+        var produtos = App.ProdutoDB.Listar();
+
+        // força refresh da UI (IMPORTANTE)
+        collectionProdutos.ItemsSource = null;
+        collectionProdutos.ItemsSource = produtos;
     }
 
-    // ✏️ EDITAR PRODUTO (clique no card)
+    // 🛒 abrir carrinho
+    private async void OnIrCarrinhoClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CarrinhoPage());
+    }
+
+    // ✏️ editar produto
     private async void OnItemTapped(object sender, TappedEventArgs e)
     {
         var produto = (Produto)e.Parameter;
@@ -29,7 +41,7 @@ public partial class ProdutosPage : ContentPage
         await Navigation.PushAsync(new CadastroProdutoPage(produto));
     }
 
-    // 🗑 EXCLUIR PRODUTO
+    // 🗑 excluir produto
     private async void OnExcluirClicked(object sender, EventArgs e)
     {
         bool confirm = await DisplayAlert(
@@ -50,7 +62,7 @@ public partial class ProdutosPage : ContentPage
         CarregarProdutos();
     }
 
-    // 🛒 ADICIONAR AO CARRINHO
+    // 🛒 adicionar ao carrinho
     private async void OnAddCarrinhoClicked(object sender, EventArgs e)
     {
         var button = sender as Button;

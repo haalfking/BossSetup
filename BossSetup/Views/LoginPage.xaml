@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BossSetup.Views.LoginPage">
+             x:Class="BossSetup.Views.LoginPage"
+             BackgroundColor="Black"
+             NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Image Source="logo..png"
+                HeightRequest="350"
+                HorizontalOptions="Center"/>
 
         <Label Text="Login"
                FontSize="24"
                HorizontalOptions="Center"/>
 
         <Entry x:Name="txtEmail"
-               Placeholder="Digite seu email" />
+               Placeholder="Digite seu email"
+               TextColor="White"/>
 
         <Entry x:Name="txtSenha"
                Placeholder="Digite sua senha"
-               IsPassword="True"/>
+               IsPassword="True"
+               TextColor="White"/>
 
         <Button Text="Entrar"
-                Clicked="OnLoginClicked"/>
+                Clicked="OnLoginClicked"
+                 BackgroundColor="#121212"/>
 
         <Button Text="Criar conta"
-                Clicked="OnCadastroClicked"/>
+                Clicked="OnCadastroClicked"
+                 BackgroundColor="#121212"/>
 
         <Label x:Name="lblMensagem"
                TextColor="Red"/>

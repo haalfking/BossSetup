@@ -3,24 +3,33 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.HomePage"
-             Title="Home">
+             Title="Home"
+             BackgroundColor="Black"
+              NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="20"
                          Spacing="15">
 
+        <Image Source="logo..png"
+         HeightRequest="350"
+         HorizontalOptions="Center"/>
+
         <Label Text="Bem-vindo ao Boss Setup!"
                FontSize="22"
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center"/>
 
         <Button Text="Ver Produtos"
-                Clicked="OnVerProdutosClicked"/>
+                Clicked="OnVerProdutosClicked"
+                  BackgroundColor="#121212"/>
 
         <Button Text="Sair"
-                Clicked="OnLogoutClicked" />
+                Clicked="OnLogoutClicked" 
+                  BackgroundColor="#121212"/>
 
         <Button x:Name="btnCadastrarProduto"
                 Text="Cadastrar Produto"
-                Clicked="OnCadastrarProdutoClicked" />
+                Clicked="OnCadastrarProdutoClicked" 
+                  BackgroundColor="#121212"/>
 
     </VerticalStackLayout>
 
