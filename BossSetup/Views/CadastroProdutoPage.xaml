@@ -12,7 +12,7 @@
         <VerticalStackLayout Padding="20"
                              Spacing="15">
 
-            <Image Source="logo..png"
+            <Image Source="logo.png"
                    HeightRequest="250"
                    HorizontalOptions="Center"/>
 
@@ -23,28 +23,34 @@
                    TextColor="White"/>
 
             <Entry x:Name="txtNome"
-                   Placeholder="Nome do produto" />
+                   Placeholder="Nome do produto"
+                   TextColor="White"/>
 
             <Editor x:Name="txtDescricao"
                     Placeholder="Descrição do produto"
                     AutoSize="TextChanges"
-                    HeightRequest="100"/>
+                    HeightRequest="100"
+                    TextColor="White"/>
 
             <Entry x:Name="txtPreco"
                    Placeholder="Preço"
-                   Keyboard="Numeric"/>
+                   Keyboard="Numeric"
+                   TextColor="White"/>
 
             <!-- NOVOS CAMPOS -->
 
             <Entry x:Name="txtCategoria"
-                   Placeholder="Categoria" />
+                   Placeholder="Categoria"
+                   TextColor="White"/>
 
             <Entry x:Name="txtEstoque"
                    Placeholder="Quantidade em estoque"
-                   Keyboard="Numeric"/>
+                   Keyboard="Numeric"
+                   TextColor="White"/>
 
             <Entry x:Name="txtImagem"
-                   Placeholder="URL da imagem do produto" />
+                   Placeholder="URL da imagem do produto" 
+                   TextColor="White"/>
 
             <HorizontalStackLayout Spacing="10">
 

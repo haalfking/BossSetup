@@ -10,7 +10,7 @@
     <VerticalStackLayout Padding="20"
                          Spacing="15">
 
-        <Image Source="logo..png"
+        <Image Source="logo.png"
          HeightRequest="350"
          HorizontalOptions="Center"/>
 

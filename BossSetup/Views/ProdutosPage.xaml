@@ -6,19 +6,27 @@
              BackgroundColor="Black"
              NavigationPage.HasNavigationBar="False">
 
-    <VerticalStackLayout Padding="20" Spacing="10">
+    <!-- TROQUEI VerticalStackLayout POR GRID (ESSENCIAL PARA SCROLL) -->
+    <Grid RowDefinitions="Auto,*" Padding="20">
 
-        <!-- 🛒 BOTÃO DO CARRINHO -->
-        <Button Text="🛒 Ver Carrinho"
-                BackgroundColor="#121212"
-                TextColor="White"
-                Clicked="OnIrCarrinhoClicked"/>
+        <!-- 🛒 BOTÃO DO CARRINHO + LOGO -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
 
-        <Image Source="logo..png"
-         HeightRequest="350"
-         HorizontalOptions="Center"/>
+            <Button Text="🛒 Ver Carrinho"
+                    BackgroundColor="#121212"
+                    TextColor="White"
+                    Clicked="OnIrCarrinhoClicked"/>
 
-        <CollectionView x:Name="collectionProdutos" SelectionMode="None">
+            <Image Source="logo.png"
+                   HeightRequest="180"
+                   HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+        <!-- LISTA (AGORA SCROLL FUNCIONA) -->
+        <CollectionView Grid.Row="1"
+                        x:Name="collectionProdutos"
+                        SelectionMode="None">
 
             <!-- GRID 2 COLUNAS -->
             <CollectionView.ItemsLayout>
@@ -43,10 +51,16 @@
 
                         <VerticalStackLayout Spacing="5">
 
-                            <!-- IMAGEM -->
-                            <Image Source="{Binding Imagem}"
+                            <!-- IMAGEM (CORRIGIDO AQUI 👇) -->
+                            <Frame Padding="0"
+                                   CornerRadius="12"
                                    HeightRequest="350"
-                                   Aspect="AspectFill"/>
+                                   IsClippedToBounds="True"
+                                   BackgroundColor="White">
+
+                                <Image Source="{Binding Imagem}"  Aspect="AspectFit"/>
+
+                            </Frame>
 
                             <!-- NOME -->
                             <Label Text="{Binding Nome}"
@@ -83,7 +97,7 @@
 
                             <!-- DESTAQUE -->
                             <Label Text="{Binding Destaque, StringFormat='Destaque: {0}'}"
-                                   FontSize="6"
+                                   FontSize="10"
                                    TextColor="Gray"/>
 
                             <!-- BOTÕES -->
@@ -116,5 +130,6 @@
 
         </CollectionView>
 
-    </VerticalStackLayout>
+    </Grid>
+
 </ContentPage>
