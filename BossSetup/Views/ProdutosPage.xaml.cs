@@ -1,4 +1,5 @@
 ﻿using BossSetup.Models;
+using BossSetup.Services;
 
 namespace BossSetup.Views;
 
@@ -47,5 +48,16 @@ public partial class ProdutosPage : ContentPage
         App.ProdutoDB.Deletar(id);
 
         CarregarProdutos();
+    }
+
+    // 🛒 ADICIONAR AO CARRINHO
+    private async void OnAddCarrinhoClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var produto = (Produto)button.CommandParameter;
+
+        Carrinho.Adicionar(produto);
+
+        await DisplayAlert("Carrinho", "Produto adicionado!", "OK");
     }
 }

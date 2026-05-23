@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BossSetup.Views.CarrinhoPage"
+             Title="Carrinho">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="🛒 Seu Carrinho"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <CollectionView x:Name="collectionCarrinho">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Frame BorderColor="LightGray"
+                           Padding="10"
+                           Margin="5"
+                           CornerRadius="10">
+
+                        <VerticalStackLayout Spacing="5">
+
+                            <Label Text="{Binding Nome}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+
+                            <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
+                                   TextColor="Green"/>
+
+                            <Button Text="Remover"
+                                    BackgroundColor="Red"
+                                    TextColor="White"
+                                    Clicked="OnRemoverClicked"
+                                    CommandParameter="{Binding .}"/>
+
+                        </VerticalStackLayout>
+
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Label x:Name="lblTotal"
+               Text="Total: R$ 0,00"
+               FontSize="20"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+</ContentPage>
