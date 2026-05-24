@@ -3,34 +3,175 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.HomePage"
-             Title="Home"
-             BackgroundColor="Black"
-              NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="Black">
 
-    <VerticalStackLayout Padding="20"
-                         Spacing="15">
+    <ScrollView>
 
-        <Image Source="logo.png"
-         HeightRequest="350"
-         HorizontalOptions="Center"/>
+        <VerticalStackLayout Padding="20"
+                             Spacing="20">
 
-        <Label Text="Bem-vindo ao Boss Setup!"
-               FontSize="22"
-               HorizontalOptions="Center"/>
+            <!-- LOGO -->
+            <Image Source="logo.png"
+                   HeightRequest="220"
+                   HorizontalOptions="Center"/>
 
-        <Button Text="Ver Produtos"
-                Clicked="OnVerProdutosClicked"
-                  BackgroundColor="#121212"/>
+            <!-- TEXO PRINCIPAL -->
+            <Label Text="Monte o Setup dos Seus Sonhos"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
 
-        <Button Text="Sair"
-                Clicked="OnLogoutClicked" 
-                  BackgroundColor="#121212"/>
+            <Label Text="Periféricos, hardware e acessórios gamers com qualidade."
+                   FontSize="14"
+                   TextColor="#AAAAAA"/>
 
-        <Button x:Name="btnCadastrarProduto"
-                Text="Cadastrar Produto"
-                Clicked="OnCadastrarProdutoClicked" 
-                  BackgroundColor="#121212"/>
+            <!-- BANNER -->
+            <Frame BackgroundColor="#151515"
+                   CornerRadius="20"
+                   Padding="20"
+                   HasShadow="False">
 
-    </VerticalStackLayout>
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="🔥 Produtos em Destaque"
+           FontSize="22"
+           FontAttributes="Bold"
+           TextColor="White"/>
+
+                    <CollectionView ItemsSource="{Binding ProdutosDestaque}"
+                    HeightRequest="350">
+
+                        <CollectionView.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Frame BackgroundColor="#151515"
+                       CornerRadius="20"
+                       Padding="15"
+                       Margin="0,10"
+                       HasShadow="False">
+
+                                    <VerticalStackLayout Spacing="10">
+
+                                        <Image Source="{Binding Imagem}"
+                               HeightRequest="140"
+                               Aspect="AspectFit"/>
+
+                                        <Label Text="{Binding Nome}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="White"/>
+
+                                        <Label Text="{Binding Descricao}"
+                               TextColor="#CCCCCC"
+                               MaxLines="2"/>
+
+                                        <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
+                               FontSize="20"
+                               TextColor="#6C63FF"/>
+
+                                    </VerticalStackLayout>
+
+                                </Frame>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- BENEFÍCIOS -->
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="10"
+                  RowSpacing="10">
+
+                <Frame Grid.Row="0"
+                       Grid.Column="0"
+                       BackgroundColor="#151515"
+                       CornerRadius="15">
+
+                    <VerticalStackLayout>
+                        <Label Text="🚚"
+                               FontSize="30"
+                               HorizontalOptions="Center"/>
+
+                        <Label Text="Entrega Rápida"
+                               HorizontalOptions="Center"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Frame Grid.Row="0"
+                       Grid.Column="1"
+                       BackgroundColor="#151515"
+                       CornerRadius="15">
+
+                    <VerticalStackLayout>
+                        <Label Text="🔒"
+                               FontSize="30"
+                               HorizontalOptions="Center"/>
+
+                        <Label Text="Compra Segura"
+                               HorizontalOptions="Center"
+                               TextColor="White"/>
+                    </VerticalStackLayout>
+
+                </Frame>
+
+            </Grid>
+
+            <!-- BOTÕES -->
+            <Button Text=" Ver Produtos"
+                    Clicked="OnVerProdutosClicked"
+                    BackgroundColor="#6C63FF"
+                    TextColor="White"
+                    CornerRadius="15"
+                    HeightRequest="55"/>
+
+            <Button x:Name="btnCadastrarProduto"
+                    Text=" Cadastrar Produto"
+                    Clicked="OnCadastrarProdutoClicked"
+                    BackgroundColor="#1E1E1E"
+                    TextColor="White"
+                    CornerRadius="15"
+                    HeightRequest="55"/>
+
+            <Button Text=" Sair"
+                    Clicked="OnLogoutClicked"
+                    BackgroundColor="#202020"
+                    TextColor="White"
+                    CornerRadius="15"
+                    HeightRequest="55"/>
+
+            <!-- SOBRE -->
+            <Frame BackgroundColor="#151515"
+                   CornerRadius="20"
+                   Padding="20"
+                   Margin="0,10">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Sobre a Boss Setup"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+
+                    <Label Text="A Boss Setup oferece periféricos, hardware e acessórios gamers para elevar seu desempenho e transformar seu setup."
+                           TextColor="#CCCCCC"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>

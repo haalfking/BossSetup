@@ -2,20 +2,29 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.CadastroPage"
-             Title="Cadastro">
+             Title="Cadastro"
+              BackgroundColor="Black"
+              NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="30" Spacing="15">
 
-        <Label Text="Cadastro de Usuário"
-               FontSize="22"
+        <Image Source="logo.png"
+               HeightRequest="180"
                HorizontalOptions="Center"/>
 
-        <Entry x:Name="txtNome" Placeholder="Nome" />
-        <Entry x:Name="txtEmail" Placeholder="Email" />
-        <Entry x:Name="txtSenha" Placeholder="Senha" IsPassword="True"/>
+        <Label Text="Cadastro de Usuário"
+               FontSize="22"
+               HorizontalOptions="Center"
+               TextColor="White"/>
+
+        <Entry x:Name="txtNome" Placeholder="Nome"  TextColor="White"/>
+        <Entry x:Name="txtEmail" Placeholder="Email"  TextColor="White" />
+        <Entry x:Name="txtSenha" Placeholder="Senha" IsPassword="True"  TextColor="White"/>
 
         <Button Text="Salvar"
-                Clicked="OnSalvarClicked"/>
+                Clicked="OnSalvarClicked"
+                 BackgroundColor="gray"
+                 TextColor="black"/>
 
     </VerticalStackLayout>
 

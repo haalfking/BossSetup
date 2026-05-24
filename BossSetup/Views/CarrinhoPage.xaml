@@ -2,37 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.CarrinhoPage"
-             Title="Carrinho">
+             Title="Carrinho"
+              BackgroundColor="Black"
+              NavigationPage.HasNavigationBar="False">
 
     <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Image Source="logo.png"
+                HeightRequest="180"
+                HorizontalOptions="Center"/>
 
         <Label Text="🛒 Seu Carrinho"
                FontSize="24"
                FontAttributes="Bold"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center" 
+               TextColor="White"/>
 
         <CollectionView x:Name="collectionCarrinho">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Frame BorderColor="LightGray"
+                    <Frame BorderColor="Gray"
                            Padding="10"
                            Margin="5"
-                           CornerRadius="10">
+                           CornerRadius="10"
+                            BackgroundColor="#121212">
 
                         <VerticalStackLayout Spacing="5">
 
                             <Label Text="{Binding Nome}"
                                    FontSize="18"
-                                   FontAttributes="Bold"/>
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
 
                             <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
                                    TextColor="Green"/>
 
                             <Button Text="Remover"
-                                    BackgroundColor="Red"
-                                    TextColor="White"
+                                     BackgroundColor="gray"
+                                    TextColor="black"
+                                     CornerRadius="10"
+                                     WidthRequest="100"
                                     Clicked="OnRemoverClicked"
                                     CommandParameter="{Binding .}"/>
 
@@ -49,7 +62,8 @@
                Text="Total: R$ 0,00"
                FontSize="20"
                FontAttributes="Bold"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center"
+               TextColor="White"/>
 
     </VerticalStackLayout>
 </ContentPage>
