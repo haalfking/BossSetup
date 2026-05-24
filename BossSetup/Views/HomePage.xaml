@@ -4,174 +4,162 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.HomePage"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="Black">
+             BackgroundColor="{StaticResource BossBackground}">
 
-    <ScrollView>
+    <Grid RowDefinitions="Auto,*">
 
-        <VerticalStackLayout Padding="20"
-                             Spacing="20">
+        <!-- Sair no canto superior direito -->
+        <Grid Grid.Row="0"
+              Padding="16,12,16,0"
+              ColumnDefinitions="*,Auto">
+            <Button Grid.Column="1"
+                    x:Name="btnSair"
+                    Text="Sair"
+                    Style="{StaticResource BtnCompact}"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Clicked="OnSairClicked"/>
+        </Grid>
 
-            <!-- LOGO -->
-            <Image Source="logo.png"
-                   HeightRequest="220"
-                   HorizontalOptions="Center"/>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,0,20,24" Spacing="20">
 
-            <!-- TEXO PRINCIPAL -->
-            <Label Text="Monte o Setup dos Seus Sonhos"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   TextColor="White"/>
+                <!-- Hero: logo + ver produtos -->
+                <VerticalStackLayout Spacing="20"
+                                     HorizontalOptions="Center"
+                                     Margin="0,8,0,8">
 
-            <Label Text="Periféricos, hardware e acessórios gamers com qualidade."
-                   FontSize="14"
-                   TextColor="#AAAAAA"/>
+                    <Image Source="logo.png"
+                           HeightRequest="280"
+                           WidthRequest="280"
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center"/>
 
-            <!-- BANNER -->
-            <Frame BackgroundColor="#151515"
-                   CornerRadius="20"
-                   Padding="20"
-                   HasShadow="False">
+                    <Button x:Name="btnVerProdutos"
+                            Text="Ver produtos"
+                            Style="{StaticResource BtnSecondary}"
+                            HorizontalOptions="Center"
+                            WidthRequest="220"
+                            Clicked="OnVerProdutosClicked"/>
 
-                <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout x:Name="painelAdmin"
+                                         Spacing="10"
+                                         HorizontalOptions="Center"
+                                         IsVisible="False">
 
-                    <Label Text="🔥 Produtos em Destaque"
-           FontSize="22"
-           FontAttributes="Bold"
-           TextColor="White"/>
+                        <Button x:Name="btnCadastrarProduto"
+                                Text="Cadastrar produtos"
+                                Style="{StaticResource BtnSecondary}"
+                                HorizontalOptions="Center"
+                                WidthRequest="220"
+                                Clicked="OnCadastrarProdutoClicked"/>
 
-                    <CollectionView ItemsSource="{Binding ProdutosDestaque}"
-                    HeightRequest="350">
+                        <Button x:Name="btnGerenciarUsuarios"
+                                Text="Gerenciar usuários"
+                                Style="{StaticResource BtnSecondary}"
+                                HorizontalOptions="Center"
+                                WidthRequest="220"
+                                Clicked="OnGerenciarUsuariosClicked"/>
 
-                        <CollectionView.ItemTemplate>
+                    </VerticalStackLayout>
 
-                            <DataTemplate>
+                </VerticalStackLayout>
 
-                                <Frame BackgroundColor="#151515"
-                       CornerRadius="20"
-                       Padding="15"
-                       Margin="0,10"
-                       HasShadow="False">
+                <Label Text="Monte o Setup dos Seus Sonhos"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"/>
 
-                                    <VerticalStackLayout Spacing="10">
+                <Label Text="Periféricos, hardware e acessórios gamers com qualidade."
+                       FontSize="14"
+                       TextColor="{StaticResource BossTextMuted}"
+                       HorizontalTextAlignment="Center"/>
 
-                                        <Image Source="{Binding Imagem}"
-                               HeightRequest="140"
-                               Aspect="AspectFit"/>
+                <Frame Style="{StaticResource BossCard}">
 
-                                        <Label Text="{Binding Nome}"
-                               FontSize="18"
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label Text="Produtos em destaque"
+                               FontSize="20"
                                FontAttributes="Bold"
                                TextColor="White"/>
 
-                                        <Label Text="{Binding Descricao}"
-                               TextColor="#CCCCCC"
-                               MaxLines="2"/>
+                        <CollectionView ItemsSource="{Binding ProdutosDestaque}"
+                                        HeightRequest="350">
 
-                                        <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
-                               FontSize="20"
-                               TextColor="#6C63FF"/>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="{StaticResource BossSurfaceLight}"
+                                           CornerRadius="14"
+                                           Padding="12"
+                                           Margin="0,6"
+                                           HasShadow="False">
+                                        <VerticalStackLayout Spacing="8">
+                                            <Image Source="{Binding Imagem}"
+                                                   HeightRequest="120"
+                                                   Aspect="AspectFit"/>
+                                            <Label Text="{Binding Nome}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White"/>
+                                            <Label Text="{Binding Descricao}"
+                                                   TextColor="{StaticResource BossTextMuted}"
+                                                   MaxLines="2"/>
+                                            <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
+                                                   FontSize="18"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource BossAccent}"/>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
 
-                                    </VerticalStackLayout>
+                        </CollectionView>
 
-                                </Frame>
-
-                            </DataTemplate>
-
-                        </CollectionView.ItemTemplate>
-
-                    </CollectionView>
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-            <!-- BENEFÍCIOS -->
-            <Grid ColumnDefinitions="*,*"
-                  RowDefinitions="Auto,Auto"
-                  ColumnSpacing="10"
-                  RowSpacing="10">
-
-                <Frame Grid.Row="0"
-                       Grid.Column="0"
-                       BackgroundColor="#151515"
-                       CornerRadius="15">
-
-                    <VerticalStackLayout>
-                        <Label Text="🚚"
-                               FontSize="30"
-                               HorizontalOptions="Center"/>
-
-                        <Label Text="Entrega Rápida"
-                               HorizontalOptions="Center"
-                               TextColor="White"/>
                     </VerticalStackLayout>
 
                 </Frame>
 
-                <Frame Grid.Row="0"
-                       Grid.Column="1"
-                       BackgroundColor="#151515"
-                       CornerRadius="15">
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="10">
 
-                    <VerticalStackLayout>
-                        <Label Text="🔒"
-                               FontSize="30"
-                               HorizontalOptions="Center"/>
+                    <Frame Grid.Column="0" Style="{StaticResource BossCard}" Padding="12">
+                        <VerticalStackLayout>
+                            <Label Text="🚚" FontSize="28" HorizontalOptions="Center"/>
+                            <Label Text="Entrega Rápida"
+                                   HorizontalOptions="Center"
+                                   TextColor="White"
+                                   FontSize="13"/>
+                        </VerticalStackLayout>
+                    </Frame>
 
-                        <Label Text="Compra Segura"
-                               HorizontalOptions="Center"
+                    <Frame Grid.Column="1" Style="{StaticResource BossCard}" Padding="12">
+                        <VerticalStackLayout>
+                            <Label Text="🔒" FontSize="28" HorizontalOptions="Center"/>
+                            <Label Text="Compra Segura"
+                                   HorizontalOptions="Center"
+                                   TextColor="White"
+                                   FontSize="13"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                </Grid>
+
+                <Frame Style="{StaticResource BossCard}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Sobre a Boss Setup"
+                               FontSize="18"
+                               FontAttributes="Bold"
                                TextColor="White"/>
+                        <Label Text="A Boss Setup oferece periféricos, hardware e acessórios gamers para elevar seu desempenho e transformar seu setup."
+                               TextColor="{StaticResource BossTextMuted}"/>
                     </VerticalStackLayout>
-
                 </Frame>
 
-            </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
 
-            <!-- BOTÕES -->
-            <Button Text=" Ver Produtos"
-                    Clicked="OnVerProdutosClicked"
-                    BackgroundColor="#6C63FF"
-                    TextColor="White"
-                    CornerRadius="15"
-                    HeightRequest="55"/>
-
-            <Button x:Name="btnCadastrarProduto"
-                    Text=" Cadastrar Produto"
-                    Clicked="OnCadastrarProdutoClicked"
-                    BackgroundColor="#1E1E1E"
-                    TextColor="White"
-                    CornerRadius="15"
-                    HeightRequest="55"/>
-
-            <Button Text=" Sair"
-                    Clicked="OnLogoutClicked"
-                    BackgroundColor="#202020"
-                    TextColor="White"
-                    CornerRadius="15"
-                    HeightRequest="55"/>
-
-            <!-- SOBRE -->
-            <Frame BackgroundColor="#151515"
-                   CornerRadius="20"
-                   Padding="20"
-                   Margin="0,10">
-
-                <VerticalStackLayout Spacing="10">
-
-                    <Label Text="Sobre a Boss Setup"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           TextColor="White"/>
-
-                    <Label Text="A Boss Setup oferece periféricos, hardware e acessórios gamers para elevar seu desempenho e transformar seu setup."
-                           TextColor="#CCCCCC"/>
-
-                </VerticalStackLayout>
-
-            </Frame>
-
-        </VerticalStackLayout>
-
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

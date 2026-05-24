@@ -11,42 +11,39 @@ public partial class HomePage : ContentPage
     {
         InitializeComponent();
 
-        ProdutosDestaque = new ObservableCollection<Produto>
-        (
-            App.ProdutoDB.Listar()
-            .Where(p => p.Destaque)
-        );
+        ProdutosDestaque = new ObservableCollection<Produto>(
+            App.ProdutoDB.Listar().Where(p => p.Destaque));
 
         BindingContext = this;
-
-        // Controle de acesso
-        if (App.UsuarioLogado?.Tipo != "Admin")
-        {
-            btnCadastrarProduto.IsVisible = false;
-        }
+        AtualizarPainelAdmin();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
+        AtualizarPainelAdmin();
+
         ProdutosDestaque.Clear();
-
-        var produtos = App.ProdutoDB.Listar()
-            .Where(p => p.Destaque);
-
-        foreach (var produto in produtos)
-        {
+        foreach (var produto in App.ProdutoDB.Listar().Where(p => p.Destaque))
             ProdutosDestaque.Add(produto);
-        }
     }
 
-    private async void OnLogoutClicked(object sender, EventArgs e)
+    private void AtualizarPainelAdmin()
     {
-        // limpa usuário logado
-        App.UsuarioLogado = null;
+        bool isAdmin = App.UsuarioLogado?.Tipo == "Admin";
+        painelAdmin.IsVisible = isAdmin;
+    }
 
-        await Navigation.PopToRootAsync();
+    private void OnSairClicked(object sender, EventArgs e)
+    {
+        App.UsuarioLogado = null;
+        Application.Current!.MainPage = new NavigationPage(new LoginPage());
+    }
+
+    private async void OnVerProdutosClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ProdutosPage());
     }
 
     private async void OnCadastrarProdutoClicked(object sender, EventArgs e)
@@ -54,8 +51,8 @@ public partial class HomePage : ContentPage
         await Navigation.PushAsync(new CadastroProdutoPage());
     }
 
-    private async void OnVerProdutosClicked(object sender, EventArgs e)
+    private async void OnGerenciarUsuariosClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ProdutosPage());
+        await Navigation.PushAsync(new UsuariosPage());
     }
 }

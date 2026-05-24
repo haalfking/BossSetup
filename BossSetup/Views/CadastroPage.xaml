@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BossSetup.Controls"
              x:Class="BossSetup.Views.CadastroPage"
              Title="Cadastro"
-              BackgroundColor="Black"
-              NavigationPage.HasNavigationBar="False">
+             BackgroundColor="{StaticResource BossBackground}"
+             NavigationPage.HasNavigationBar="False">
 
-    <VerticalStackLayout Padding="30" Spacing="15">
+    <Grid RowDefinitions="Auto,*">
 
-        <Image Source="logo.png"
-               HeightRequest="180"
-               HorizontalOptions="Center"/>
+        <controls:PageTopBar x:Name="topBar"
+                             Grid.Row="0"
+                             Titulo="Cadastro" />
 
-        <Label Text="Cadastro de Usuário"
-               FontSize="22"
-               HorizontalOptions="Center"
-               TextColor="White"/>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="14">
 
-        <Entry x:Name="txtNome" Placeholder="Nome"  TextColor="White"/>
-        <Entry x:Name="txtEmail" Placeholder="Email"  TextColor="White" />
-        <Entry x:Name="txtSenha" Placeholder="Senha" IsPassword="True"  TextColor="White"/>
+                <Entry x:Name="txtNome"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Nome"/>
 
-        <Button Text="Salvar"
-                Clicked="OnSalvarClicked"
-                 BackgroundColor="gray"
-                 TextColor="black"/>
+                <Entry x:Name="txtEmail"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="E-mail"/>
 
-    </VerticalStackLayout>
+                <Entry x:Name="txtSenha"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Senha"
+                       IsPassword="True"/>
+
+                <Button Text="Salvar"
+                        Style="{StaticResource BtnSecondary}"
+                        Clicked="OnSalvarClicked"
+                        Margin="0,8,0,0"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 
 </ContentPage>

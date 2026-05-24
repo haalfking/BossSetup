@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BossSetup.Controls"
+             x:Class="BossSetup.Views.UsuariosPage"
+             Title="Usuários"
+             BackgroundColor="{StaticResource BossBackground}"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <controls:PageTopBar x:Name="topBar"
+                             Grid.Row="0"
+                             Titulo="Usuários" />
+
+        <CollectionView Grid.Row="1"
+                        x:Name="collectionUsuarios"
+                        Margin="12,8">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource BossCard}" Margin="0,4">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Nome}"
+                                   FontSize="17"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="{Binding Email}"
+                                   TextColor="{StaticResource BossTextMuted}"/>
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="{Binding Tipo, StringFormat='Tipo: {0}'}"
+                                   TextColor="{StaticResource BossAccent}"/>
+                            <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
+                                    Text="Excluir"
+                                    Style="{StaticResource BtnDanger}"
+                                    VerticalOptions="Center"
+                                    Clicked="OnExcluirUsuarioClicked"
+                                    CommandParameter="{Binding .}"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

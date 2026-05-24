@@ -2,72 +2,65 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BossSetup.Controls"
              x:Class="BossSetup.Views.CadastroProdutoPage"
              Title="Cadastro de Produto"
-              BackgroundColor="Black"
+             BackgroundColor="{StaticResource BossBackground}"
              NavigationPage.HasNavigationBar="False">
 
-    <ScrollView>
+    <Grid RowDefinitions="Auto,*">
 
-        <VerticalStackLayout Padding="20"
-                             Spacing="15">
+        <controls:PageTopBar x:Name="topBar"
+                             Grid.Row="0"
+                             Titulo="Produto" />
 
-            <Image Source="logo.png"
-                   HeightRequest="250"
-                   HorizontalOptions="Center"/>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="12">
 
-            <Label Text="Cadastrar Produto"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="White"/>
+                <Entry x:Name="txtNome"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Nome do produto"/>
 
-            <Entry x:Name="txtNome"
-                   Placeholder="Nome do produto"
-                   TextColor="White"/>
+                <Editor x:Name="txtDescricao"
+                        Placeholder="Descrição"
+                        AutoSize="TextChanges"
+                        HeightRequest="100"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource BossSurface}"/>
 
-            <Editor x:Name="txtDescricao"
-                    Placeholder="Descrição do produto"
-                    AutoSize="TextChanges"
-                    HeightRequest="100"
-                    TextColor="White"/>
+                <Entry x:Name="txtPreco"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Preço"
+                       Keyboard="Numeric"/>
 
-            <Entry x:Name="txtPreco"
-                   Placeholder="Preço"
-                   Keyboard="Numeric"
-                   TextColor="White"/>
+                <Entry x:Name="txtCategoria"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Categoria"/>
 
-            <!-- NOVOS CAMPOS -->
+                <Entry x:Name="txtEstoque"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Estoque"
+                       Keyboard="Numeric"/>
 
-            <Entry x:Name="txtCategoria"
-                   Placeholder="Categoria"
-                   TextColor="White"/>
+                <Entry x:Name="txtImagem"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Nome da imagem (ex: logo.png)"/>
 
-            <Entry x:Name="txtEstoque"
-                   Placeholder="Quantidade em estoque"
-                   Keyboard="Numeric"
-                   TextColor="White"/>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Destaque?"
+                           VerticalOptions="Center"
+                           TextColor="White"/>
+                    <Switch x:Name="switchDestaque"/>
+                </HorizontalStackLayout>
 
-            <Entry x:Name="txtImagem"
-                   Placeholder="URL da imagem do produto" 
-                   TextColor="White"/>
+                <Button Text="Salvar produto"
+                        Style="{StaticResource BtnPrimary}"
+                        Clicked="OnSalvarClicked"
+                        Margin="0,8,0,16"/>
 
-            <HorizontalStackLayout Spacing="10">
+            </VerticalStackLayout>
+        </ScrollView>
 
-                <Label Text="Produto em destaque?"
-                       VerticalOptions="Center"
-                       TextColor="White"/>
-
-                <Switch x:Name="switchDestaque"/>
-
-            </HorizontalStackLayout>
-
-            <Button Text="Salvar Produto"
-                    Clicked="OnSalvarClicked"
-                     BackgroundColor="#121212"/>
-
-        </VerticalStackLayout>
-
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

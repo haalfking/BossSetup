@@ -9,12 +9,15 @@ public partial class CadastroProdutoPage : ContentPage
     public CadastroProdutoPage()
     {
         InitializeComponent();
+        topBar.VoltarClicked += async (_, _) => await Navigation.PopAsync();
     }
 
     // ✏️ MODO EDIÇÃO
     public CadastroProdutoPage(Produto produto)
     {
         InitializeComponent();
+        topBar.VoltarClicked += async (_, _) => await Navigation.PopAsync();
+        topBar.Titulo = "Editar produto";
 
         produtoEditando = produto;
 

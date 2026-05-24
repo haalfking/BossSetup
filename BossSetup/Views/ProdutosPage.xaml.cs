@@ -8,6 +8,9 @@ public partial class ProdutosPage : ContentPage
     public ProdutosPage()
     {
         InitializeComponent();
+
+        topBar.VoltarClicked += async (_, _) => await Navigation.PopAsync();
+        topBar.AcaoClicked += async (_, _) => await Navigation.PushAsync(new CarrinhoPage());
     }
 
     // 🔄 sempre recarrega ao voltar pra tela
@@ -27,23 +30,25 @@ public partial class ProdutosPage : ContentPage
         collectionProdutos.ItemsSource = produtos;
     }
 
-    // 🛒 abrir carrinho
-    private async void OnIrCarrinhoClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new CarrinhoPage());
-    }
-
     // ✏️ editar produto
     private async void OnItemTapped(object sender, TappedEventArgs e)
     {
-        var produto = (Produto)e.Parameter;
+        if (App.UsuarioLogado?.Tipo != "Admin")
+            return;
 
+        var produto = (Produto)e.Parameter!;
         await Navigation.PushAsync(new CadastroProdutoPage(produto));
     }
 
     // 🗑 excluir produto
     private async void OnExcluirClicked(object sender, EventArgs e)
     {
+        if (App.UsuarioLogado?.Tipo != "Admin")
+        {
+            await DisplayAlert("Acesso negado", "Apenas administradores podem excluir produtos.", "OK");
+            return;
+        }
+
         bool confirm = await DisplayAlert(
             "Excluir",
             "Deseja realmente excluir este produto?",

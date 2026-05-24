@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BossSetup.Controls.PageTopBar"
+             x:Name="Root">
+
+    <Border Stroke="#2C2C2C"
+            StrokeThickness="1"
+            BackgroundColor="{StaticResource BossSurface}"
+            Padding="12,10">
+
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+
+            <Button Grid.Column="0"
+                    x:Name="btnVoltar"
+                    Text="←"
+                    Style="{StaticResource BtnSecondary}"
+                    WidthRequest="48"
+                    Padding="0"
+                    Clicked="OnVoltarClicked" />
+
+            <Label Grid.Column="1"
+                   x:Name="lblTitulo"
+                   Style="{StaticResource PageTitle}"
+                   HorizontalOptions="Center" />
+
+            <Button Grid.Column="2"
+                    x:Name="btnAcao"
+                    Style="{StaticResource BtnPrimary}"
+                    IsVisible="False"
+                    Clicked="OnAcaoClicked" />
+
+        </Grid>
+    </Border>
+</ContentView>

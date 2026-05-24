@@ -42,4 +42,14 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- Boss Setup theme -->
+    <Color x:Key="BossBackground">#0D0D0D</Color>
+    <Color x:Key="BossSurface">#1A1A1A</Color>
+    <Color x:Key="BossSurfaceLight">#252525</Color>
+    <Color x:Key="BossAccent">#6C63FF</Color>
+    <Color x:Key="BossAccentDark">#554FD6</Color>
+    <Color x:Key="BossTextMuted">#AAAAAA</Color>
+    <Color x:Key="BossSuccess">#00C853</Color>
+    <Color x:Key="BossDanger">#C62828</Color>
 </ResourceDictionary>

@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:BossSetup.Helpers"
+             xmlns:controls="clr-namespace:BossSetup.Controls"
              x:Class="BossSetup.Views.ProdutosPage"
              Title="Produtos"
-             BackgroundColor="Black"
+             BackgroundColor="{StaticResource BossBackground}"
              NavigationPage.HasNavigationBar="False">
 
-    <!-- TROQUEI VerticalStackLayout POR GRID (ESSENCIAL PARA SCROLL) -->
-    <Grid RowDefinitions="Auto,*" Padding="20">
+    <Grid RowDefinitions="Auto,*" Padding="0">
 
-        <!-- 🛒 BOTÃO DO CARRINHO + LOGO -->
-        <VerticalStackLayout Grid.Row="0" Spacing="10">
+        <controls:PageTopBar x:Name="topBar"
+                             Grid.Row="0"
+                             Titulo="Produtos"
+                             TextoAcao="Carrinho" />
 
-            <Button Text="🛒 Ver Carrinho"
-                    BackgroundColor="#121212"
-                    TextColor="White"
-                    Clicked="OnIrCarrinhoClicked"/>
-
-            <Image Source="logo.png"
-                   HeightRequest="180"
-                   HorizontalOptions="Center"/>
-
-        </VerticalStackLayout>
-
-        <!-- LISTA (AGORA SCROLL FUNCIONA) -->
         <CollectionView Grid.Row="1"
                         x:Name="collectionProdutos"
+                        Margin="12,8,12,12"
                         SelectionMode="None">
 
-            <!-- GRID 2 COLUNAS -->
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2"/>
             </CollectionView.ItemsLayout>
@@ -36,86 +27,59 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Frame BorderColor="#2C2C2C"
-                           BackgroundColor="#1E1E1E"
-                           CornerRadius="15"
-                           Padding="10"
-                           Margin="5"
-                           HasShadow="True">
+                    <Frame Style="{StaticResource BossCard}"
+                           Margin="4"
+                           Padding="10">
 
-                        <!-- CLIQUE PARA EDITAR -->
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnItemTapped"
                                                   CommandParameter="{Binding .}" />
                         </Frame.GestureRecognizers>
 
-                        <VerticalStackLayout Spacing="5">
+                        <VerticalStackLayout Spacing="6">
 
-                            <!-- IMAGEM (CORRIGIDO AQUI 👇) -->
                             <Frame Padding="0"
                                    CornerRadius="12"
-                                   HeightRequest="350"
+                                   HeightRequest="140"
                                    IsClippedToBounds="True"
-                                   BackgroundColor="White">
-
-                                <Image Source="{Binding Imagem}"  Aspect="AspectFit"/>
-
+                                   BackgroundColor="White"
+                                   HasShadow="False">
+                                <Image Source="{Binding Imagem}" Aspect="AspectFit"/>
                             </Frame>
 
-                            <!-- NOME -->
                             <Label Text="{Binding Nome}"
-                                   FontSize="16"
+                                   FontSize="15"
                                    FontAttributes="Bold"
                                    TextColor="White"/>
 
-                            <!-- DESCRIÇÃO -->
                             <Label Text="{Binding Descricao}"
-                                   FontSize="12"
-                                   TextColor="Gray"
+                                   FontSize="11"
+                                   TextColor="{StaticResource BossTextMuted}"
                                    MaxLines="2"/>
 
-                            <!-- CATEGORIA -->
                             <Label Text="{Binding Categoria}"
-                                   FontSize="12"
-                                   TextColor="LightBlue"/>
+                                   FontSize="11"
+                                   TextColor="{StaticResource BossAccent}"/>
 
-                            <!-- PREÇO -->
                             <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
-                                   FontSize="18"
+                                   FontSize="16"
                                    FontAttributes="Bold"
-                                   TextColor="#00FF88"/>
+                                   TextColor="{StaticResource BossSuccess}"/>
 
-                            <!-- ESTOQUE -->
                             <Label Text="{Binding Estoque, StringFormat='Estoque: {0}'}"
-                                   FontSize="12"
+                                   FontSize="11"
                                    TextColor="White"/>
 
-                            <!-- AVALIAÇÃO -->
-                            <Label Text="{Binding Avaliacao, StringFormat='⭐ {0:F1}'}"
-                                   FontSize="12"
-                                   TextColor="Yellow"/>
+                            <HorizontalStackLayout Spacing="6">
 
-                            <!-- DESTAQUE -->
-                            <Label Text="{Binding Destaque, StringFormat='Destaque: {0}'}"
-                                   FontSize="10"
-                                   TextColor="Gray"/>
-
-                            <!-- BOTÕES -->
-                            <HorizontalStackLayout Spacing="5">
-
-                                <Button Text="comprar"
-                                        BackgroundColor="#00C853"
-                                        TextColor="Black"
-                                        CornerRadius="10"
-                                        WidthRequest="100"
+                                <Button Text="Comprar"
+                                        Style="{StaticResource BtnSuccess}"
                                         Clicked="OnAddCarrinhoClicked"
                                         CommandParameter="{Binding .}"/>
 
                                 <Button Text="Excluir"
-                                        BackgroundColor="Gray"
-                                        TextColor="Black"
-                                        CornerRadius="10"
-                                        WidthRequest="70"
+                                        Style="{StaticResource BtnDanger}"
+                                        IsVisible="{Binding Source={x:Static helpers:AppState.IsAdmin}}"
                                         Clicked="OnExcluirClicked"
                                         CommandParameter="{Binding Id}"/>
 

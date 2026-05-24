@@ -2,39 +2,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BossSetup.Views.LoginPage"
-             BackgroundColor="Black"
+             BackgroundColor="{StaticResource BossBackground}"
              NavigationPage.HasNavigationBar="False">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center">
 
-        <Image Source="logo.png"
-                HeightRequest="350"
-                HorizontalOptions="Center"/>
+            <Image Source="logo.png"
+                   HeightRequest="200"
+                   HorizontalOptions="Center"/>
 
-        <Label Text="Login"
-               FontSize="24"
-               HorizontalOptions="Center"/>
+            <Label Text="Bem-vindo"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
 
-        <Entry x:Name="txtEmail"
-               Placeholder="Digite seu email"
-               TextColor="White"/>
+            <Label Text="Entre na sua conta Boss Setup"
+                   FontSize="14"
+                   TextColor="{StaticResource BossTextMuted}"
+                   HorizontalOptions="Center"/>
 
-        <Entry x:Name="txtSenha"
-               Placeholder="Digite sua senha"
-               IsPassword="True"
-               TextColor="White"/>
+            <Entry x:Name="txtEmail"
+                   Style="{StaticResource BossEntry}"
+                   Placeholder="E-mail"/>
 
-        <Button Text="Entrar"
-                Clicked="OnLoginClicked"
-                 BackgroundColor="#121212"/>
+            <Entry x:Name="txtSenha"
+                   Style="{StaticResource BossEntry}"
+                   Placeholder="Senha"
+                   IsPassword="True"/>
 
-        <Button Text="Criar conta"
-                Clicked="OnCadastroClicked"
-                 BackgroundColor="#121212"/>
+            <Label x:Name="lblMensagem"
+                   TextColor="{StaticResource BossDanger}"
+                   HorizontalOptions="Center"/>
 
-        <Label x:Name="lblMensagem"
-               TextColor="Red"/>
+            <Button Text="Entrar"
+                    Style="{StaticResource BtnSecondary}"
+                    Clicked="OnLoginClicked"/>
 
-    </VerticalStackLayout>
+            <Button Text="Criar conta"
+                    Style="{StaticResource BtnSecondary}"
+                    Clicked="OnCadastroClicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BossSetup.Controls.HomeTopBar"
+             x:Name="Root">
+
+    <Border Stroke="#2C2C2C"
+            StrokeThickness="1"
+            BackgroundColor="{StaticResource BossSurface}"
+            Padding="16,12">
+
+        <VerticalStackLayout Spacing="12">
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Image Grid.Column="0"
+                       Source="logo.png"
+                       HeightRequest="48"
+                       WidthRequest="48"
+                       Aspect="AspectFit" />
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="Boss Setup"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                    <Label Text="Sua loja gamer"
+                           FontSize="12"
+                           TextColor="{StaticResource BossTextMuted}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <ScrollView Orientation="Horizontal"
+                        HorizontalScrollBarVisibility="Never">
+                <HorizontalStackLayout Spacing="8">
+
+                    <Button x:Name="btnVerProdutos"
+                            Text="Produtos"
+                            Style="{StaticResource BtnPrimary}"
+                            Clicked="OnVerProdutosClicked" />
+
+                    <Button x:Name="btnCadastrarProduto"
+                            Text="Cadastrar"
+                            Style="{StaticResource BtnSecondary}"
+                            IsVisible="False"
+                            Clicked="OnCadastrarProdutoClicked" />
+
+                    <Button x:Name="btnGerenciarUsuarios"
+                            Text="Usuários"
+                            Style="{StaticResource BtnSecondary}"
+                            IsVisible="False"
+                            Clicked="OnGerenciarUsuariosClicked" />
+
+                    <Button x:Name="btnSair"
+                            Text="Sair"
+                            Style="{StaticResource BtnDanger}"
+                            Clicked="OnSairClicked" />
+
+                </HorizontalStackLayout>
+            </ScrollView>
+
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

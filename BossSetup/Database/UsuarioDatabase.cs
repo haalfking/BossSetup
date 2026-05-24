@@ -43,5 +43,11 @@ namespace BossSetup.Database
             return _db.Table<Usuario>()
                       .FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
+
+        public bool ExisteEmail(string email)
+        {
+            return _db.Table<Usuario>()
+                      .Any(u => u.Email == email);
+        }
     }
 }
