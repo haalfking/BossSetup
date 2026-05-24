@@ -26,7 +26,7 @@ public partial class CadastroPage : ContentPage
 
             if (App.Database.ExisteEmail(email))
             {
-                await DisplayAlert("Erro", "Este e-mail j est cadastrado.", "OK");
+                await DisplayAlert("Erro", "Este e-mail jï¿½ estï¿½ cadastrado.", "OK");
                 return;
             }
 
@@ -40,7 +40,7 @@ public partial class CadastroPage : ContentPage
 
             App.Database.Salvar(u);
 
-            await DisplayAlert("Sucesso", "Usurio cadastrado! Faa login para continuar.", "OK");
+            await DisplayAlert("Sucesso", "Usuï¿½rio cadastrado! Faï¿½a login para continuar.", "OK");
             await Navigation.PopAsync();
         }
         catch (Exception ex)

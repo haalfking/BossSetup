@@ -1,4 +1,5 @@
 using BossSetup.Models;
+using BossSetup.Services;
 using System.Collections.ObjectModel;
 
 namespace BossSetup.Views;
@@ -11,10 +12,10 @@ public partial class HomePage : ContentPage
     {
         InitializeComponent();
 
-        ProdutosDestaque = new ObservableCollection<Produto>(
-            App.ProdutoDB.Listar().Where(p => p.Destaque));
-
+        ProdutosDestaque = new ObservableCollection<Produto>();
         BindingContext = this;
+
+        AtualizarSaudacao();
         AtualizarPainelAdmin();
     }
 
@@ -22,17 +23,37 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 
+        AtualizarSaudacao();
         AtualizarPainelAdmin();
+        CarregarDestaques();
+    }
 
-        ProdutosDestaque.Clear();
-        foreach (var produto in App.ProdutoDB.Listar().Where(p => p.Destaque))
-            ProdutosDestaque.Add(produto);
+    private void AtualizarSaudacao()
+    {
+        string nome = App.UsuarioLogado?.Nome ?? "visitante";
+        lblSaudacao.Text = $"Ol\u00E1, {nome}!";
     }
 
     private void AtualizarPainelAdmin()
     {
-        bool isAdmin = App.UsuarioLogado?.Tipo == "Admin";
-        painelAdmin.IsVisible = isAdmin;
+        painelAdmin.IsVisible = App.UsuarioLogado?.Tipo == "Admin";
+    }
+
+    private void CarregarDestaques()
+    {
+        ProdutosDestaque.Clear();
+
+        foreach (var produto in App.ProdutoDB.Listar().Where(p => p.Destaque))
+            ProdutosDestaque.Add(produto);
+
+        bool temDestaques = ProdutosDestaque.Count > 0;
+        collectionDestaques.IsVisible = temDestaques;
+        lblSemDestaques.IsVisible = !temDestaques;
+    }
+
+    private async void OnCarrinhoClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CarrinhoPage());
     }
 
     private void OnSairClicked(object sender, EventArgs e)
@@ -54,5 +75,14 @@ public partial class HomePage : ContentPage
     private async void OnGerenciarUsuariosClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new UsuariosPage());
+    }
+
+    private async void OnComprarDestaqueClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var produto = (Produto)button!.CommandParameter;
+
+        Carrinho.Adicionar(produto);
+        await DisplayAlert("Carrinho", $"{produto.Nome} adicionado!", "OK");
     }
 }

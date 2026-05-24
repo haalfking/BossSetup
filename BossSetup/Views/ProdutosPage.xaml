@@ -13,7 +13,7 @@
         <controls:PageTopBar x:Name="topBar"
                              Grid.Row="0"
                              Titulo="Produtos"
-                             TextoAcao="Carrinho" />
+                             TextoAcao="🛒 Carrinho" />
 
         <CollectionView Grid.Row="1"
                         x:Name="collectionProdutos"

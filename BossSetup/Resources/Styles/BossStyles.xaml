@@ -35,6 +35,18 @@
         <Setter Property="BorderWidth" Value="0" />
     </Style>
 
+    <!-- Carrinho no topo: um pouco maior que BtnCompact -->
+    <Style x:Key="BtnNavBar" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource BossSurfaceLight}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="16,10" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="BorderWidth" Value="0" />
+    </Style>
+
     <Style x:Key="BtnDanger" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource BossDanger}" />
         <Setter Property="TextColor" Value="White" />

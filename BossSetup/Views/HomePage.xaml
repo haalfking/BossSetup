@@ -8,32 +8,57 @@
 
     <Grid RowDefinitions="Auto,*">
 
-        <!-- Sair no canto superior direito -->
+        <!-- Topo: saudação à esquerda, carrinho e sair à direita -->
         <Grid Grid.Row="0"
               Padding="16,12,16,0"
               ColumnDefinitions="*,Auto">
-            <Button Grid.Column="1"
-                    x:Name="btnSair"
-                    Text="Sair"
-                    Style="{StaticResource BtnCompact}"
-                    HorizontalOptions="End"
-                    VerticalOptions="Start"
-                    Clicked="OnSairClicked"/>
+            <Label Grid.Column="0"
+                   x:Name="lblSaudacao"
+                   FontFamily="OpenSansRegular"
+                   FontSize="14"
+                   TextColor="{StaticResource BossTextMuted}"
+                   VerticalOptions="Center"/>
+            <HorizontalStackLayout Grid.Column="1"
+                                   Spacing="8"
+                                   VerticalOptions="Center">
+                <Button x:Name="btnCarrinho"
+                        Text="🛒 Carrinho"
+                        Style="{StaticResource BtnNavBar}"
+                        Clicked="OnCarrinhoClicked"/>
+                <Button x:Name="btnSair"
+                        Text="Sair"
+                        Style="{StaticResource BtnCompact}"
+                        Clicked="OnSairClicked"/>
+            </HorizontalStackLayout>
         </Grid>
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20,0,20,24" Spacing="20">
 
-                <!-- Hero: logo + ver produtos -->
-                <VerticalStackLayout Spacing="20"
-                                     HorizontalOptions="Center"
-                                     Margin="0,8,0,8">
+                <!-- Logo -->
+                <Image Source="logo.png"
+                       HeightRequest="260"
+                       WidthRequest="260"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       Margin="0,4,0,0"/>
 
-                    <Image Source="logo.png"
-                           HeightRequest="280"
-                           WidthRequest="280"
-                           Aspect="AspectFit"
-                           HorizontalOptions="Center"/>
+                <!-- Slogan -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Monte o Setup dos Seus Sonhos"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"/>
+                    <Label Text="Periféricos, hardware e acessórios gamers com qualidade."
+                           FontSize="14"
+                           TextColor="{StaticResource BossTextMuted}"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+
+                <!-- Botões -->
+                <VerticalStackLayout Spacing="10"
+                                     HorizontalOptions="Center">
 
                     <Button x:Name="btnVerProdutos"
                             Text="Ver produtos"
@@ -65,51 +90,66 @@
 
                 </VerticalStackLayout>
 
-                <Label Text="Monte o Setup dos Seus Sonhos"
-                       FontSize="24"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       HorizontalTextAlignment="Center"/>
-
-                <Label Text="Periféricos, hardware e acessórios gamers com qualidade."
-                       FontSize="14"
-                       TextColor="{StaticResource BossTextMuted}"
-                       HorizontalTextAlignment="Center"/>
-
+                <!-- Destaques em carrossel horizontal -->
                 <Frame Style="{StaticResource BossCard}">
 
-                    <VerticalStackLayout Spacing="10">
+                    <VerticalStackLayout Spacing="12">
 
                         <Label Text="Produtos em destaque"
                                FontSize="20"
                                FontAttributes="Bold"
                                TextColor="White"/>
 
-                        <CollectionView ItemsSource="{Binding ProdutosDestaque}"
-                                        HeightRequest="350">
+                        <Label x:Name="lblSemDestaques"
+                               Text="Nenhum produto em destaque no momento."
+                               TextColor="{StaticResource BossTextMuted}"
+                               HorizontalTextAlignment="Center"
+                               IsVisible="False"/>
+
+                        <CollectionView x:Name="collectionDestaques"
+                                        ItemsSource="{Binding ProdutosDestaque}"
+                                        HeightRequest="300"
+                                        SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"
+                                                   ItemSpacing="12"
+                                                   SnapPointsType="MandatorySingle"
+                                                   SnapPointsAlignment="Start"/>
+                            </CollectionView.ItemsLayout>
 
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame BackgroundColor="{StaticResource BossSurfaceLight}"
+                                           BorderColor="#2C2C2C"
                                            CornerRadius="14"
                                            Padding="12"
-                                           Margin="0,6"
+                                           WidthRequest="175"
                                            HasShadow="False">
                                         <VerticalStackLayout Spacing="8">
+
                                             <Image Source="{Binding Imagem}"
-                                                   HeightRequest="120"
+                                                   HeightRequest="90"
                                                    Aspect="AspectFit"/>
+
                                             <Label Text="{Binding Nome}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="White"
+                                                   MaxLines="2"
+                                                   LineBreakMode="TailTruncation"/>
+
+                                            <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
                                                    FontSize="16"
                                                    FontAttributes="Bold"
-                                                   TextColor="White"/>
-                                            <Label Text="{Binding Descricao}"
-                                                   TextColor="{StaticResource BossTextMuted}"
-                                                   MaxLines="2"/>
-                                            <Label Text="{Binding Preco, StringFormat='R$ {0:F2}'}"
-                                                   FontSize="18"
-                                                   FontAttributes="Bold"
                                                    TextColor="{StaticResource BossAccent}"/>
+
+                                            <Button Text="Comprar"
+                                                    Style="{StaticResource BtnSuccess}"
+                                                    FontSize="12"
+                                                    Clicked="OnComprarDestaqueClicked"
+                                                    CommandParameter="{Binding .}"/>
+
                                         </VerticalStackLayout>
                                     </Frame>
                                 </DataTemplate>

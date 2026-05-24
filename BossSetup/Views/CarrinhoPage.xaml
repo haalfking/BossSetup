@@ -54,7 +54,9 @@
                    TextColor="White"/>
 
             <Button Text="Finalizar compra"
-                    Style="{StaticResource BtnPrimary}"
+                    Style="{StaticResource BtnSecondary}"
+                    HorizontalOptions="Center"
+                    WidthRequest="220"
                     Clicked="OnFinalizarClicked"/>
 
         </VerticalStackLayout>

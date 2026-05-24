@@ -26,7 +26,7 @@
 
             <Button Grid.Column="2"
                     x:Name="btnAcao"
-                    Style="{StaticResource BtnPrimary}"
+                    Style="{StaticResource BtnNavBar}"
                     IsVisible="False"
                     Clicked="OnAcaoClicked" />
 
