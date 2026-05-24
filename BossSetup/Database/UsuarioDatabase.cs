@@ -44,10 +44,10 @@ namespace BossSetup.Database
                       .FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
 
-        public bool ExisteEmail(string email)
+        public bool ExisteEmail(string email, int ignorarId = 0)
         {
             return _db.Table<Usuario>()
-                      .Any(u => u.Email == email);
+                      .Any(u => u.Email == email && u.Id != ignorarId);
         }
     }
 }

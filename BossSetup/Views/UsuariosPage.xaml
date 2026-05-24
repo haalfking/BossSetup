@@ -32,12 +32,24 @@
                             <Label Grid.Row="2" Grid.Column="0"
                                    Text="{Binding Tipo, StringFormat='Tipo: {0}'}"
                                    TextColor="{StaticResource BossAccent}"/>
-                            <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
-                                    Text="Excluir"
-                                    Style="{StaticResource BtnDanger}"
-                                    VerticalOptions="Center"
-                                    Clicked="OnExcluirUsuarioClicked"
-                                    CommandParameter="{Binding .}"/>
+                            <VerticalStackLayout Grid.Row="0"
+                                                 Grid.RowSpan="3"
+                                                 Grid.Column="1"
+                                                 Spacing="6"
+                                                 VerticalOptions="Center">
+                                <Button Text="Editar"
+                                        Style="{StaticResource BtnSecondary}"
+                                        FontSize="12"
+                                        Padding="10,6"
+                                        Clicked="OnEditarUsuarioClicked"
+                                        CommandParameter="{Binding .}"/>
+                                <Button Text="Excluir"
+                                        Style="{StaticResource BtnDanger}"
+                                        FontSize="12"
+                                        Padding="10,6"
+                                        Clicked="OnExcluirUsuarioClicked"
+                                        CommandParameter="{Binding .}"/>
+                            </VerticalStackLayout>
                         </Grid>
                     </Frame>
                 </DataTemplate>

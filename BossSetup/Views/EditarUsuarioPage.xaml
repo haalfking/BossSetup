@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BossSetup.Controls"
+             x:Class="BossSetup.Views.EditarUsuarioPage"
+             Title="Editar usuário"
+             BackgroundColor="{StaticResource BossBackground}"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <controls:PageTopBar x:Name="topBar"
+                             Grid.Row="0"
+                             Titulo="Editar usuário" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="14">
+
+                <Entry x:Name="txtNome"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Nome"/>
+
+                <Entry x:Name="txtEmail"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="E-mail"/>
+
+                <Entry x:Name="txtSenha"
+                       Style="{StaticResource BossEntry}"
+                       Placeholder="Nova senha (opcional)"/>
+
+                <Label Text="Tipo de usuário"
+                       TextColor="{StaticResource BossTextMuted}"
+                       FontSize="13"/>
+
+                <Picker x:Name="pickerTipo"
+                        Title="Selecione o tipo"
+                        TextColor="White"
+                        BackgroundColor="{StaticResource BossSurface}"/>
+
+                <Button Text="Salvar alterações"
+                        Style="{StaticResource BtnSecondary}"
+                        Clicked="OnSalvarClicked"
+                        Margin="0,8,0,0"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

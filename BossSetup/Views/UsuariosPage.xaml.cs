@@ -29,6 +29,14 @@ public partial class UsuariosPage : ContentPage
         collectionUsuarios.ItemsSource = App.Database.Listar();
     }
 
+    private async void OnEditarUsuarioClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var usuario = (Usuario)button!.CommandParameter;
+
+        await Navigation.PushAsync(new EditarUsuarioPage(usuario));
+    }
+
     private async void OnExcluirUsuarioClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
